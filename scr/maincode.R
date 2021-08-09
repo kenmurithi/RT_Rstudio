@@ -133,3 +133,83 @@ tail(gapminder, n = 15)
 
 gapminder[sample(nrow(gapminder), 5), ]
 
+## 8.Subsetting
+x <- c(5.4, 6.2, 7.1, 4.8, 7.5)
+names(x) <- c('a', 'b', 'c', 'd', 'e')
+print(x)
+# values in x that are greater than 4 and less than 7
+
+x1 = x>4 & x <7
+x[x1]
+
+# Vector subsetting
+
+x <- 1:3
+x
+names(x) <- c('a', 'a', 'a')
+x
+x['a']  # only returns first value
+names(x) == "a"
+x[names(x) == 'a']  # returns all three values
+x[names(x)!=c("a","c")]
+
+seAsia <- c("Myanmar","Thailand","Cambodia","Vietnam","Laos")
+gapminder <- read.csv("data/gapminder_data.csv", header=TRUE)
+names(gapminder)
+countries <- gapminder$country
+countries %in% seAsia
+
+## matrix subsetting
+
+
+## dataframe
+
+gap_head <- head(gapminder)
+gap_head
+gap_head[1]
+gap_head["country"]
+gap_head$country
+gap_head[["country"]]
+
+## conditionals
+x <- 8
+
+if (x >= 10) {
+  print("x is greater than or equal to 10")
+} else {
+  print("x is less than 10")
+}
+# ifelse function 
+##ifelse(condition is true, perform action, perform alternative action) 
+gapminder[(gapminder$year == 2002),]
+if (2002 %in% gapminder$year ){
+  print("yes, present")
+}else{
+  print("absent")
+}
+ifelse(2002 %in% gapminder$year, "present", "absent")
+
+## dplyr session
+
+data <- data.frame(x1 = 1:6,   ## creating data
+                   x2 = c(1,2,2,3,1,2),
+                   x3 = c("F","B","C","E","A","D"))
+data ## print data
+install.packages("dplyr") ## installing the package
+library(dplyr)
+help("dplyr-package")
+
+## functions
+arrange(data,x3) # using the arrange function
+filter(data,x2 == 2 | x1  == 2) # filter function
+mutate(data,x4 = x1 + x2) # adds new variables that are functions of existing variables
+pull(data,x2) # return to a vector form
+rename(data,new_data = x3)
+select(data,c(x2,x3))## select the variables by names
+
+## tidyr
+
+# principles of tidy data
+# 1. Every column is a variable
+# 2. Every row is an observation
+# 3. every cell is a single value
